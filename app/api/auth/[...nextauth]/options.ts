@@ -7,14 +7,14 @@ export const options: NextAuthOptions = {
   providers: [
     CredentialsProvider({
       // The name to display on the sign in form (e.g. 'Sign in with...')
-      name: "Username",
+      name: "user credentials",
       credentials: {
         username: {
           label: "Username - lakmina",
           type: "text",
         },
         password: {
-          label: "Password - @password",
+          label: "Password - @lakmina",
           type: "password",
         },
       },

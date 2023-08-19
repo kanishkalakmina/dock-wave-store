@@ -16,6 +16,7 @@ import HomeOutlinedIcon from "@mui/icons-material/HomeOutlined";
 import EditNoteOutlinedIcon from "@mui/icons-material/EditNoteOutlined";
 import CloudUploadOutlinedIcon from "@mui/icons-material/CloudUploadOutlined";
 import MailOutlineOutlinedIcon from "@mui/icons-material/MailOutlineOutlined";
+import DateRangeOutlinedIcon from "@mui/icons-material/DateRangeOutlined";
 import logoItem from "./logo.svg";
 import Image from "next/image";
 
@@ -29,18 +30,25 @@ const sidebarmenu = [
   },
   {
     id: 3,
+    name: "Add reminders",
+    link: "/",
+    icon: <DateRangeOutlinedIcon />,
+  },
+  {
+    id: 4,
     name: "Store files",
     link: "/files",
     icon: <CloudUploadOutlinedIcon />,
   },
+
   {
-    id: 4,
+    id: 5,
     name: "Shedule mails",
     link: "/mails",
     icon: <MailOutlineOutlinedIcon />,
   },
   {
-    id: 5,
+    id: 6,
     name: "Signout",
     link: "/api/auth/signout",
     icon: <PowerSettingsNewOutlinedIcon />,
@@ -56,17 +64,30 @@ const MenuLink = styled(Link)(({ theme }) => ({
 export function SidebarMenu() {
   return (
     <Box>
-      {sidebarmenu.map((menu) => (
+      {sidebarmenu.map((menu, index) => (
         <ListItem disablePadding key={menu.id}>
           <MenuLink href={menu.link}>
-            <ListItemButton sx={{ padding: "1.2rem 3rem", fontWeight: 500 }}>
+            <ListItemButton
+              sx={{
+                padding: "1.2rem 3rem",
+                fontWeight: 500,
+              }}
+            >
               <ListItemIcon>
-                {React.cloneElement(menu.icon, { style: { color: "#A586FD" } })}
+                {React.cloneElement(menu.icon, {
+                  style: {
+                    color:
+                      index === sidebarmenu.length - 1 ? "#A586FD" : "#A586FD",
+                  },
+                })}
               </ListItemIcon>
               <ListItemText
                 primary={menu.name}
                 primaryTypographyProps={{
-                  style: { color: "#A2A2BF" },
+                  style: {
+                    color:
+                      index === sidebarmenu.length - 1 ? "#A2A2BF" : "#A2A2BF",
+                  },
                 }}
               />
             </ListItemButton>
