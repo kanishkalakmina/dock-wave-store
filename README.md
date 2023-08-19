@@ -2,6 +2,18 @@ This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next
 
 ## Getting Started
 
+Set up your .env file
+
+Read this Doc First : https://next-auth.js.org/providers/
+
+```bash
+NEXTAUTH_SECRET=
+GITHUB_SECRET=
+GITHUB_ID=
+GOOGLE_CLIENT_SECRET=
+GOOGLE_CLIENT_ID=
+```
+
 First, run the development server:
 
 ```bash
