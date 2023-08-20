@@ -2,7 +2,7 @@ import { createTheme } from "@mui/material/styles";
 
 const CommonTheme = createTheme({
   palette: {
-    mode: "light",
+    mode: "dark",
     primary: {
       main: "#2196F3",
     },

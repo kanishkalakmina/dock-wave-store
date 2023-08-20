@@ -54,12 +54,16 @@ export function Navigation({ user, pagetype }: Props) {
       <AppBar
         sx={{
           backgroundColor:
-            CommonTheme.palette.mode === "light" ? "transparent" : "121212",
+            CommonTheme.palette.mode === "light"
+              ? "rgba(255, 255, 255, 0.6)"
+              : "rgba(10, 10, 10, 0.2)",
           color: CommonTheme.palette.mode === "light" ? "black" : "#ffff",
           boxShadow: "none",
           py: 2,
+          backdropFilter: "blur(5px)",
+          zIndex: 2,
         }}
-        position="static"
+        position="fixed"
       >
         <Toolbar
           sx={{ display: "flex", justifyContent: "space-between" }}

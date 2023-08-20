@@ -108,19 +108,20 @@ export function SidebarMenu() {
 
 export function Sidebar() {
   const SideCard = styled(Card)(({ theme }) => ({
-    width: "280px",
-    height: "100vh",
+    width: "270px",
+    height: "100%",
     border: "none",
     boxShadow: "none",
-    backgroundColor: CommonTheme.palette.mode === "light" ? "#ffff" : "#292929",
+    backgroundColor: CommonTheme.palette.mode === "light" ? "#ffff" : "#191919",
+    position: "fixed",
+    zIndex: 1,
+    marginTop: "96px",
   }));
 
   return (
     <SideCard>
       <List>
-        <Box p={6} sx={{ marginTop: "-53px" }}>
-          {/* <Image src={logoItem} alt="Bistec Care" /> */}
-        </Box>
+        <Box p={1}>{/* <Image src={logoItem} alt="Fire" /> */}</Box>
         <SidebarMenu />
       </List>
     </SideCard>
