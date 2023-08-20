@@ -15,6 +15,8 @@ import Typography from "@mui/material/Typography";
 import Link from "@mui/material/Link";
 import GlobalStyles from "@mui/material/GlobalStyles";
 import Container from "@mui/material/Container";
+import Image from "next/image";
+import logoItem from "../components/logo.svg";
 
 function Copyright(props: any) {
   return (
@@ -89,13 +91,14 @@ export default function LandingPage() {
         position="static"
         color="default"
         elevation={0}
-        sx={{ borderBottom: (theme) => `1px solid ${theme.palette.divider}` }}
+        sx={{
+          borderBottom: (theme) => `1px solid ${theme.palette.divider}`,
+          backgroundColor: "#ffff",
+        }}
       >
-        <Toolbar sx={{ flexWrap: "wrap" }}>
-          <Typography variant="h6" color="inherit" noWrap sx={{ flexGrow: 1 }}>
-            Dock Wave Web Store
-          </Typography>
-        </Toolbar>
+        <Box p={0.1} sx={{ height: "75px" }}>
+          <Image src={logoItem} alt="Bistec Care" />
+        </Box>
       </AppBar>
       {/* Hero unit */}
       <Container

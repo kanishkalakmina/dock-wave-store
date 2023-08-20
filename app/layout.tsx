@@ -9,6 +9,7 @@ import { options } from "./api/auth/[...nextauth]/options";
 import { getServerSession } from "next-auth/next";
 import Link from "next/link";
 import LandingPage from "./components/LandingPage";
+import CommonTheme from "./components/MuiTheme";
 export const metadata: Metadata = {
   title: "DOCKWAVE STORE",
   description: "To upload and store important files",
@@ -28,7 +29,13 @@ export default async function RootLayout({
             <Box sx={{ display: { xs: "none", md: "block" } }}>
               <Sidebar />
             </Box>
-            <Box sx={{ flex: 1, backgroundColor: "#f8f8f8" }}>
+            <Box
+              sx={{
+                flex: 1,
+                backgroundColor:
+                  CommonTheme.palette.mode === "light" ? "f8f8f8" : "#121212",
+              }}
+            >
               <AppBar user={session?.user} pagetype={""} />
               <MainContainer>{children}</MainContainer>
             </Box>

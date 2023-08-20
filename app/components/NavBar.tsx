@@ -9,6 +9,7 @@ import {
   useTheme,
   Card,
   List,
+  ThemeProvider,
 } from "@mui/material";
 import Link from "next/link";
 import PowerSettingsNewOutlinedIcon from "@mui/icons-material/PowerSettingsNewOutlined";
@@ -19,6 +20,7 @@ import MailOutlineOutlinedIcon from "@mui/icons-material/MailOutlineOutlined";
 import DateRangeOutlinedIcon from "@mui/icons-material/DateRangeOutlined";
 import logoItem from "./logo.svg";
 import Image from "next/image";
+import CommonTheme from "./MuiTheme";
 
 const sidebarmenu = [
   { id: 1, name: "Home", link: "/", icon: <HomeOutlinedIcon /> },
@@ -77,7 +79,10 @@ export function SidebarMenu() {
                 {React.cloneElement(menu.icon, {
                   style: {
                     color:
-                      index === sidebarmenu.length - 1 ? "#A586FD" : "#A586FD",
+                      CommonTheme.palette.mode === "light"
+                        ? "A2A2BF"
+                        : "#E1E1E1",
+                    // index === sidebarmenu.length - 1 ? "#A586FD" : "#A586FD",
                   },
                 })}
               </ListItemIcon>
@@ -86,7 +91,10 @@ export function SidebarMenu() {
                 primaryTypographyProps={{
                   style: {
                     color:
-                      index === sidebarmenu.length - 1 ? "#A2A2BF" : "#A2A2BF",
+                      CommonTheme.palette.mode === "light"
+                        ? "A2A2BF"
+                        : "#E1E1E1",
+                    // index === sidebarmenu.length - 1 ? "red" : "#A2A2BF",
                   },
                 }}
               />
@@ -104,14 +112,14 @@ export function Sidebar() {
     height: "100vh",
     border: "none",
     boxShadow: "none",
-    backgroundColor: "#ffff",
+    backgroundColor: CommonTheme.palette.mode === "light" ? "#ffff" : "#292929",
   }));
 
   return (
     <SideCard>
       <List>
         <Box p={6} sx={{ marginTop: "-53px" }}>
-          <Image src={logoItem} alt="Bistec Care" />
+          {/* <Image src={logoItem} alt="Bistec Care" /> */}
         </Box>
         <SidebarMenu />
       </List>

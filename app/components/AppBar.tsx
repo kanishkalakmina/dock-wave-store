@@ -1,11 +1,22 @@
 "use client";
 import React from "react";
 import { useRouter } from "next/navigation";
-import { Button, Typography, AppBar, Toolbar, Box } from "@mui/material";
+import {
+  Button,
+  Typography,
+  AppBar,
+  Toolbar,
+  Box,
+  ThemeProvider,
+} from "@mui/material";
 import MenuOutlinedIcon from "@mui/icons-material/MenuOutlined";
 import Image from "next/image";
 import userImage from "../../assets/profile.png";
+import CommonTheme from "./MuiTheme";
+import CustomizedSwitches from "./MuiDarkModeSwitch";
+import ControlledSwitches from "./MuiDarkModeSwitch";
 
+import Switch from "@mui/material/Switch";
 type User =
   | {
       name?: string | null | undefined;
@@ -33,13 +44,18 @@ const style = {
 export function Navigation({ user, pagetype }: Props) {
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
+  const [darkMode, setDarkMode] = React.useState(true);
+  const handleDarkModeToggle = () => {
+    setDarkMode(!darkMode);
+  };
 
   return (
-    <>
+    <ThemeProvider theme={CommonTheme}>
       <AppBar
         sx={{
-          backgroundColor: "transparent",
-          color: "black",
+          backgroundColor:
+            CommonTheme.palette.mode === "light" ? "transparent" : "121212",
+          color: CommonTheme.palette.mode === "light" ? "black" : "#ffff",
           boxShadow: "none",
           py: 2,
         }}
@@ -70,6 +86,7 @@ export function Navigation({ user, pagetype }: Props) {
               sx={{ marginLeft: "24px" }}
             ></Typography>
           </Box>
+
           <Box sx={{ display: "flex", alignItems: "center" }}>
             <Typography
               variant="body2"
@@ -89,10 +106,14 @@ export function Navigation({ user, pagetype }: Props) {
                 alt={""}
               />
             </Box>
+            <CustomizedSwitches
+              darkMode={false}
+              handleDarkModeToggle={handleDarkModeToggle}
+            />
           </Box>
         </Toolbar>
       </AppBar>
-    </>
+    </ThemeProvider>
   );
 }
 
