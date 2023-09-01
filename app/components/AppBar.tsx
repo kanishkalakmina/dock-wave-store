@@ -1,22 +1,44 @@
 "use client";
-import React from "react";
-import { useRouter } from "next/navigation";
-import {
-  Button,
-  Typography,
-  AppBar,
-  Toolbar,
-  Box,
-  ThemeProvider,
-} from "@mui/material";
-import MenuOutlinedIcon from "@mui/icons-material/MenuOutlined";
-import Image from "next/image";
 import userImage from "../../assets/profile.png";
-import CommonTheme from "./MuiTheme";
-import CustomizedSwitches from "./MuiDarkModeSwitch";
-import ControlledSwitches from "./MuiDarkModeSwitch";
+import * as React from "react";
+import AppBar from "@mui/material/AppBar";
+import Box from "@mui/material/Box";
+import Toolbar from "@mui/material/Toolbar";
+import IconButton from "@mui/material/IconButton";
+import Typography from "@mui/material/Typography";
+import MenuIcon from "@mui/icons-material/Menu";
+import Container from "@mui/material/Container";
+import Button from "@mui/material/Button";
+import Image from "next/image";
+const sidebarmenu = [
+  { id: 1, name: "Home", link: "/" },
+  {
+    id: 2,
+    name: "Notes",
+    link: "/notes",
+  },
+  {
+    id: 3,
+    name: "Reminders",
+    link: "/",
+  },
+  {
+    id: 4,
+    name: "Cloud Storage",
+    link: "/files",
+  },
 
-import Switch from "@mui/material/Switch";
+  {
+    id: 5,
+    name: "Shedule Mails",
+    link: "/mails",
+  },
+  {
+    id: 6,
+    name: "Signout",
+    link: "/api/auth/signout",
+  },
+];
 type User =
   | {
       name?: string | null | undefined;
@@ -24,101 +46,91 @@ type User =
       image?: string | null | undefined;
     }
   | undefined;
-
 type Props = {
   user: User;
   pagetype: string;
 };
-
 const userImg = {
   borderRadius: "100px",
 };
-const style = {
-  position: "absolute",
-  top: 0,
-  left: 0,
-  width: "350px",
-  height: "100vh",
-  boxShadow: 24,
-};
+
 export function Navigation({ user, pagetype }: Props) {
-  const [open, setOpen] = React.useState(false);
-  const handleOpen = () => setOpen(true);
-  const [darkMode, setDarkMode] = React.useState(true);
-  const handleDarkModeToggle = () => {
-    setDarkMode(!darkMode);
+  const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(
+    null
+  );
+
+  const handleOpenNavMenu = (event: React.MouseEvent<HTMLElement>) => {
+    setAnchorElNav(event.currentTarget);
   };
 
   return (
-    <ThemeProvider theme={CommonTheme}>
-      <AppBar
-        sx={{
-          backgroundColor:
-            CommonTheme.palette.mode === "light"
-              ? "rgba(255, 255, 255, 0.6)"
-              : "rgba(10, 10, 10, 0.2)",
-          color: CommonTheme.palette.mode === "light" ? "black" : "#ffff",
-          boxShadow: "none",
-          py: 2,
-          backdropFilter: "blur(5px)",
-          zIndex: 2,
-        }}
-        position="fixed"
-      >
-        <Toolbar
-          sx={{ display: "flex", justifyContent: "space-between" }}
-          disableGutters
-        >
-          <Box
-            sx={{
-              display: { xs: "block", md: "none" },
-            }}
-          >
-            <Button
-              variant="text"
-              disableRipple
-              sx={{ padding: "1rem" }}
-              onClick={handleOpen}
+    <AppBar
+      sx={{
+        backdropFilter: "blur(10px)",
+        position: "fixed",
+        backgroundColor: "transparent",
+      }}
+    >
+      <Container maxWidth="xl">
+        <Toolbar disableGutters>
+          <Box sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}>
+            <IconButton
+              size="large"
+              aria-label="account of current user"
+              aria-controls="menu-appbar"
+              aria-haspopup="true"
+              onClick={handleOpenNavMenu}
+              color="info"
             >
-              <MenuOutlinedIcon />
-            </Button>
+              <MenuIcon />
+            </IconButton>
           </Box>
-          <Box sx={{ display: { xs: "none", md: "block" } }}>
-            <Typography
-              variant="h4"
-              component="h4"
-              sx={{ marginLeft: "24px" }}
-            ></Typography>
+
+          <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
+            {sidebarmenu.map((page) => (
+              <Button
+                key={page.id}
+                href={page.link}
+                sx={{
+                  my: 2,
+                  color: "#101418",
+                  display: "block",
+                  marginLeft: "1rem",
+                }}
+              >
+                <Typography
+                  variant="body1"
+                  style={{
+                    textTransform: "none",
+                    fontWeight: "bold",
+                    fontFamily: "unset",
+                  }}
+                >
+                  {page.name}
+                </Typography>
+              </Button>
+            ))}
           </Box>
 
           <Box sx={{ display: "flex", alignItems: "center" }}>
+            <Image
+              width={50}
+              height={50}
+              style={userImg}
+              src={userImage}
+              alt={""}
+            />
             <Typography
               variant="body2"
               component="p"
-              sx={{ marginRight: "24px" }}
+              sx={{ marginLeft: "20px", color: "#101418" }}
             >
               {"Hi, " + user?.name}
             </Typography>
-            <Box
-              sx={{ width: "50px", height: "50px", overflow: "hidden", mr: 2 }}
-            >
-              <Image
-                width={50}
-                height={50}
-                style={userImg}
-                src={userImage}
-                alt={""}
-              />
-            </Box>
-            <CustomizedSwitches
-              darkMode={false}
-              handleDarkModeToggle={handleDarkModeToggle}
-            />
           </Box>
         </Toolbar>
-      </AppBar>
-    </ThemeProvider>
+      </Container>
+    </AppBar>
   );
 }
-
 export default Navigation;
